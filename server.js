@@ -45,14 +45,14 @@ app.post("/api/send", (req, res) => {
             res.setHeader("Content-Type", "audio/mpeg");
             res.setHeader(`Content-Disposition`, `attachment; filename=${title}.mp3`);
             const audio = ytdl(url, { quality: 'highestaudio' });
-            // audio.pipe(res);
-            await audio.pipe(fs.createWriteStream(`audio.mp3`))
+            // await audio.pipe(fs.createWriteStream(`audio.mp3`))
+            audio.pipe(res);
             audio.on("data",(data)=>{
                 console.log(data);
             })
             audio.on("finish", () => {
                 console.log("Piped!!!!!")
-                res.download(`./audio.mp3`,`${title}.mp3`)
+                // res.download(`./audio.mp3`,`${title}.mp3`)
             })
             audio.on("error", (err) => {
                 console.log("Error: " + err);
