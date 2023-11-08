@@ -61,7 +61,7 @@ app.post("/api/send/video", (req, res) => {
             console.log(title, typeof title);
             title=title.slice(0,30);
             console.log(title, typeof title);
-            res.setHeader("Content-Type", "audio/mpeg");
+            res.setHeader("Content-Type", "video/mp4");
             res.setHeader(`Content-Disposition`, `attachment; filename=${title}.mp4`);
             const audio = ytdl(url, { quality: '18' });
             // await audio.pipe(fs.createWriteStream(`audio.mp3`))
